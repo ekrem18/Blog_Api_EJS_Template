@@ -1,7 +1,5 @@
 "use strict"
-/* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
-------------------------------------------------------- */
+/* -------------------------------------------------------*/
 // Searching & Sorting & Pagination:
 
 module.exports = (req, res, next) => {

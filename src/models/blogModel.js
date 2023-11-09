@@ -1,12 +1,9 @@
 "use strict"
-/* -------------------------------------------------------
-    EXPRESSJS - BLOG Project with Mongoose
-------------------------------------------------------- */
+/* ------------------------------------------------------- */
 
 const mongoose = require('mongoose')
 
 /* ------------------------------------------------------- *
-https://mongoosejs.com/docs/models.html
 
 const nameSchema = new mongoose.Schema({
     
