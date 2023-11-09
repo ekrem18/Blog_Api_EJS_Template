@@ -14,11 +14,17 @@ const PORT = process.env.PORT || 8000
 
 /* ------------------------------------------------------- */
 // SessionCookies:
-// http://expressjs.com/en/resources/middleware/cookie-session.html
-// https://www.npmjs.com/package/cookie-session
 //* $ npm i cookie-session
 const session = require("cookie-session")                                       //---> ejs varsa JWT vs yok. cookie ile güvenlik sağlıyoruz
 app.use(session({ secret: process.env.SECRET_KEY || 'secret_keys_for_cookies' }))
+/* ------------------------------------------------------- */
+//Template   ---> npm i ejs
+
+
+
+
+
+
 /* ------------------------------------------------------- */
 // Accept json data & convert to object:
 app.use(express.json())
