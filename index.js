@@ -30,6 +30,7 @@ app.set('views', './public')
 
 // Accept form data & convert to object:
 app.use(express.urlencoded({ extended: true }))                     //---> Json veride olduğu gibi Form'dan geleni de kabul et demem için bunu çağırıyorum  
+
 // Statik Dosya Çağırma
 app.use('/assets', express.static('./public/assets'))               //---> blogControllerView 27.satır
 
@@ -44,11 +45,6 @@ require('./src/dbConnection')
 
 // Searching&Sorting&Pagination:
 app.use(require('./src/middlewares/findSearchSortPage'))
-
-// HomePage:
-// app.all('/', (req, res) => {
-//     res.send('WELCOME TO BLOG API')
-// })
 
 // Routes:
 app.use('/api/user', require('./src/routes/userRoute'))
