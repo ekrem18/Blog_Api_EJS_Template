@@ -32,7 +32,7 @@ app.set('views', './public')
 
 /* ------------------------------------------------------- */
 // Accept form data & convert to object:
-app.use(express.urlencoded( {extend: true }))                       //---> Json veride olduğu gibi Form'dan geleni de kabul et demem için bunu çağırıyorum          
+app.use(express.urlencoded({ extended: true }))                       //---> Json veride olduğu gibi Form'dan geleni de kabul et demem için bunu çağırıyorum          
 
 // Accept json data & convert to object:
 app.use(express.json())
