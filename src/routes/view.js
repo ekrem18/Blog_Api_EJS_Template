@@ -3,32 +3,12 @@
 const router = require('express').Router()
 
 // Call Controllers:
-const { BlogCategory, BlogPost } = require('../controllers/blogController')
+const { BlogCategory:blogCategoryView, BlogPost: blogPostView } = require('../controllers/blogControllerView')
 
-// ------------------------------------------
-// BlogCategory
-// ------------------------------------------
-router.route('/category')
-    .get(BlogCategory.list)
-    .post(BlogCategory.create)
-
-router.route('/category/:categoryId')
-    .get(BlogCategory.read)
-    .put(BlogCategory.update)
-    .delete(BlogCategory.delete)
-
-// ------------------------------------------
-// BlogPost
-// ------------------------------------------
-router.route('/post')
-    .get(BlogPost.list)
-    .post(BlogPost.create)
-
-router.route('/post/:postId')
-    .get(BlogPost.read)
-    .put(BlogPost.update)
-    .delete(BlogPost.delete)
-
-router.get('/category/:categoryId/posts', BlogPost.listCategoryPosts)
+router.all('/post', blogPostView.list)
+router.all('/post/create', blogPostView.create)
+router.all('/post/:postId', blogPostView.read)
+router.all('/post/:postId/update', blogPostView.update)
+router.all('/post/:postId/delete', blogPostView.delete)
 
 module.exports = router
