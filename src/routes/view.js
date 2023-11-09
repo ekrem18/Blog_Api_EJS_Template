@@ -3,7 +3,7 @@
 const router = require('express').Router()
 
 // Call Controllers:
-const { BlogCategory:blogCategoryView, BlogPost: blogPostView } = require('../controllers/blogControllerView')
+const { BlogCategory:blogCategoryView, BlogPost:blogPostView } = require('../controllers/blogControllerView')
 
 router.all('/', (req, res)=>{
     res.redirect('/post')                               //---> daha kısa yönlendirme mümkün olsa da pratik-training olması amacıyla bu şekilde yapıyorum.               
@@ -16,3 +16,5 @@ router.all('/post/:postId/update', blogPostView.update)
 router.all('/post/:postId/delete', blogPostView.delete)
 
 module.exports = router
+
+
