@@ -24,12 +24,15 @@ module.exports.BlogPost = {
         // })
 
         const categories = await BlogCategory.find()
+        const recentPosts = await BlogPost.find().sort({ createdAt: 'desc' }).limit(3)
 
         //HTML Output   
-        res.render('index.ejs', {                                       //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
+        res.render('index.ejs', {      
+            details: await res.getModelListDetails(BlogPost),          //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
             categories,                                                //---> Statik dosya çağırma kurallarına uymam gerekior.
-            posts: data,                                               
-            details: await res.getModelListDetails(BlogPost),
+            posts: data,  
+            recentPosts,                                             
+            
         } )                                         
     },                                                                 
 
