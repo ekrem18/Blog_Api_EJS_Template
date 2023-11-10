@@ -23,10 +23,15 @@ module.exports.BlogPost = {
         //     result: data,
         // })
 
-        //HTML Output
-        res.render('index.ejs' )                                        //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı. Statik 
-                                                                      //---> dosya çağırma kurallarına uymam gerekior.
-    },
+        const categories = await BlogCategory.find()
+
+        //HTML Output   
+        res.render('index.ejs', {                                       //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
+            categories,                                                //---> Statik dosya çağırma kurallarına uymam gerekior.
+            posts: data,                                               
+            details: await res.getModelListDetails(BlogPost),
+        } )                                         
+    },                                                                 
 
     listCategoryPosts: async (req, res) => {
 
