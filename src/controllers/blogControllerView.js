@@ -26,13 +26,16 @@ module.exports.BlogPost = {
         const categories = await BlogCategory.find()
         const recentPosts = await BlogPost.find().sort({ createdAt: 'desc' }).limit(3)
 
+         // Add '?' parameters to url if there is not:
+         if (!req.url.includes('?')) req.url += '?'
+
         //HTML Output   
         res.render('index.ejs', {      
             details: await res.getModelListDetails(BlogPost),          //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
             categories,                                                //---> Statik dosya çağırma kurallarına uymam gerekior.
             posts: data,  
-            recentPosts,                                             
-            
+            recentPosts,  
+            pageUrl: req.url.replace(/[?|&]page=([^&]+)/gi, '')        //---> sayfa geçişlerinde her sayfayı url'ye eklemesini engelliyorum  
         } )                                         
     },                                                                 
 
