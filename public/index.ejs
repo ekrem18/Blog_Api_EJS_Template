@@ -35,7 +35,7 @@
             <nav class="nav nav-underline justify-content-between">
                 {% for (let category of categories ) { %}
                 <a class="nav-item nav-link link-body-emphasis" href="/post?filter[blogCategoryId]={%= category._id %}">{%= category.name %}</a>  
-                <!-- blogCategoryId'si = category._id' ye eşit olan post'ları getir filtrelemesi yapıyorum. FindSearch.. MW'de yaptığım güncelleme ile arka planda zaten filtrelemeleri yapıyorum    -->  
+                <!-- blogCategoryId'si = category._id' ye eşit olan post'ları getir filtrelemesi yapıyorum. FindSearch.. MW'de yaptığım güncelleme ile arka planda zaten filtrelemeleri yapıyorum. Böylece kategoriye bastığımda onla ilgli olan postları görüntülüyorum    -->  
                 {% } %}
             </nav>
         </div>
