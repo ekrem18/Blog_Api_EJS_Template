@@ -30,7 +30,8 @@ module.exports.BlogPost = {
          if (!req.url.includes('?')) req.url += '?'
 
         //HTML Output   
-        res.render('index.ejs', {      
+        // res.render('index.ejs', {      
+        res.render('postList.ejs', {      
             details: await res.getModelListDetails(BlogPost),          //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
             categories,                                                //---> Statik dosya çağırma kurallarına uymam gerekior.
             posts: data,  
@@ -38,17 +39,6 @@ module.exports.BlogPost = {
             pageUrl: req.url.replace(/[?|&]page=([^&]+)/gi, '')        //---> sayfa geçişlerinde her sayfayı url'ye eklemesini engelliyorum  
         } )                                         
     },                                                                 
-
-    listCategoryPosts: async (req, res) => {
-
-        const data = await BlogPost.find({ blogCategoryId: req.params.categoryId }).populate('blogCategoryId')
-
-        res.status(200).send({
-            error: false,
-            count: data.length,
-            result: data
-        })
-    },
 
     create: async (req, res) => {
         const data = await BlogPost.create(req.body)
@@ -63,30 +53,35 @@ module.exports.BlogPost = {
     read: async (req, res) => {
         const data = await BlogPost.findOne({ _id: req.params.postId }).populate('blogCategoryId') // get Primary Data
 
-        res.status(200).send({
-            error: false,
-            result: data
-        })
+       res.render('postRead', {
+        post: data, 
+       })
 
     },
 
     update: async (req, res) => {
-        const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body, { runValidators: true })
 
-        res.status(202).send({
-            error: false,
-            body: req.body,
-            result: data, // update infos
-            newData: await BlogPost.findOne({ _id: req.params.postId })
-        })
+        if(req.method == 'POST') {
+            const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body, { runValidators: true })
 
+            res.redirect('/post/' + req.params.postId)                          //---> bir form gönderme işi varsa post işlemi için burası
+        
+        }else{ 
+           
+            res.render('postForm', {                                            //---> ancak, görüntüleme varsa postForm dosyasını çalıştırıyorum
+                categories: await BlogCategory.find(),                          //---> ve mevcut verilerin forma gelmesi için de devamını yazdım
+                post: await BlogPost.findOne({ _id: req.params.postId }).populate('blogCategoryId') 
+            })
+        }   
     },
 
     delete: async (req, res) => {
         
         const data = await BlogPost.deleteOne({ _id: req.params.postId })
 
-        res.sendStatus( (data.deletedCount >= 1) ? 204 : 404 )
+        // res.sendStatus( (data.deletedCount >= 1) ? 204 : 404 )
+
+        res.redirect('/')
 
     },
 }
