@@ -44,7 +44,9 @@ module.exports.BlogPost = {
     create: async (req, res) => {
 
         if (req.method == 'POST') {
-        
+            //post create işlemi için gerekli olan id'yi login olan kullanıcıdan al diyorum
+            req.body.userId = req.session.user.id
+
             const data = await BlogPost.create(req.body)
 
             res.redirect('/post/' + data.id)
