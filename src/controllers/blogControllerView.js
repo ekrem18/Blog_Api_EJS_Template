@@ -52,6 +52,7 @@ module.exports.BlogPost = {
         } else {
 
             res.render('postForm', {
+                user: req.session?.user,
                 categories: await BlogCategory.find(),
                 post: null
             })
@@ -62,6 +63,7 @@ module.exports.BlogPost = {
         const data = await BlogPost.findOne({ _id: req.params.postId }).populate('blogCategoryId') // get Primary Data
 
        res.render('postRead', {
+        user: req.session?.user,
         post: data, 
        })
 
@@ -77,6 +79,7 @@ module.exports.BlogPost = {
         }else{ 
            
             res.render('postForm', {                                            //---> ancak, görüntüleme varsa postForm dosyasını çalıştırıyorum
+                user: req.session?.user,
                 categories: await BlogCategory.find(),                          //---> ve mevcut verilerin forma gelmesi için de devamını yazdım
                 post: await BlogPost.findOne({ _id: req.params.postId }).populate('blogCategoryId') 
             })
