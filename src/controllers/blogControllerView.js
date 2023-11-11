@@ -32,6 +32,7 @@ module.exports.BlogPost = {
         //HTML Output   
         // res.render('index.ejs', {      
         res.render('postList.ejs', {      
+            user: req.session?.user,
             details: await res.getModelListDetails(BlogPost),          //---> public içerisinde bulunan index'ten al diyorum. çünkü verinin geldiği route farklı.
             categories,                                                //---> Statik dosya çağırma kurallarına uymam gerekior.
             posts: data,  
